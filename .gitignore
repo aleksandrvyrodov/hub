@@ -1,0 +1,23 @@
+# ----------------
+# folders
+
+/**
+**/.git
+
+!/local/
+!/local/**
+!/ssrc/
+!/ssrc/**
+
+# ----------------
+# files
+
+!/.gitignore
+!/favicon.ico
+!/LICENSE
+!/README.md
+!/local.code-workspace
+!/root.code-workspace
+
+
+
