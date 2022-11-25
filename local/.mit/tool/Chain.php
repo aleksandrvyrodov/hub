@@ -1,6 +1,6 @@
 <?php
 
-namespace MIT;
+namespace MIT\Tool;
 
 class Chain
 {

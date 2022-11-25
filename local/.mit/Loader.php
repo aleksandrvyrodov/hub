@@ -4,6 +4,7 @@ namespace MIT;
 
 class Loader
 {
+
   private array $list_Model = [];
   private array $list_Module = [];
   private array $list_Component = [];
@@ -30,9 +31,9 @@ class Loader
       if ($this->list_Module[$name])
         return true;
       else
-        return $fn_include($name);
+        return $fn_include($name, $this);
     } else
-      return $fn_include($name);
+      return $fn_include($name, $this);
   }
 
   public function loadComponent($name)
@@ -58,7 +59,7 @@ class Loader
           else
             throw new \Exception("[MIT] Fail load dependenses", 1);
         } else
-          throw new \Exception("[MIT] Need use inteface IModel for your model", 1);
+          throw new \Exception("[MIT] Need use inteface IIncludeDependencies for your model", 1);
       } else
         throw new \Exception("[MIT] Undefinded model", 1);
     }
