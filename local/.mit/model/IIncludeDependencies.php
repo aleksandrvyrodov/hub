@@ -6,5 +6,5 @@ use MIT\Loader;
 
 interface IIncludeDependencies
 {
-  public static function Dep(Loader $loader): bool;
+  public static function Dep(Loader $Loader): bool;
 }

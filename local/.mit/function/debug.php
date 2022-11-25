@@ -1,3 +1,4 @@
 <?php
 
-namespace MIT;
+namespace MIT {
+};
