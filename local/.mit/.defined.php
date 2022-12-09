@@ -9,5 +9,5 @@ namespace MIT {
   const PATH_FN     = PATH_ROOT . '/function';
   const PATH_VENDOR = PATH_ROOT . '/vendor';
 
-  const PATH_APP_CORE = PATH_APP . '/.core';
+  const PATH_APP_CORE = PATH_APP . '/core';
 }
