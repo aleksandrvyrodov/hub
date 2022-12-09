@@ -11,3 +11,7 @@ namespace MIT {
 
   const PATH_APP_CORE = PATH_APP . '/core';
 }
+
+namespace MIT\Bitrix {
+  const PATH_SETTINGS   = \MIT\PATH_ENV . '/bitrix/.settings.php';
+}

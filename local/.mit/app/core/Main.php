@@ -22,22 +22,32 @@ class Main
 
   public function initWhoops()
   {
-    // if ($debugConfig['debug']) {
+    $config = include(\MIT\Bitrix\PATH_SETTINGS);
+    $debug_config = $config['exception_handling']['value'] ?? false;
+
+    if ($debug_config && $debug_config['debug']) {
 
       if (!class_exists(Run::class)) {
         throw $this->composerException;
       }
 
-      error_reporting(E_ALL & ~E_NOTICE);
+      if (isset($debug_config['handled_errors_types'])) {
+        $error_level = ($debug_config['handled_errors_types'] & E_NOTICE)
+          ? ($debug_config['handled_errors_types'] & ~E_NOTICE)
+          : $debug_config['handled_errors_types'];
 
-      $handler = new PrettyPageHandler;
-      $handler->setEditor(fn ($file, $line) => "vscode://file$file:$line");
-      // $handler->setEditor("vscode");
+        error_reporting($error_level);
 
-      $Whoops = new Run;
+        $handler = new PrettyPageHandler;
+        $handler->setPageTitle("Ops! Error caught.");
+        // $handler->setEditor(fn ($file, $line) => "vscode://file$file:$line");
+        // $handler->setEditor("vscode");
 
-      $Whoops->pushHandler($handler);
-      $Whoops->register();
-    // }
+        $Whoops = new Run;
+
+        $Whoops->pushHandler($handler);
+        $Whoops->register();
+      }
+    }
   }
 }
