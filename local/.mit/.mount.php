@@ -14,7 +14,8 @@ global $MITLoader;
   ->addNamespace('MIT', MIT\PATH_ROOT)
   ->register();
 
-(new Main)
+!defined('MIT\\MANUAL_ASSEMBLY')
+  && (new Main)
   ->includeLibAll();
 
 $MITLoader = Loader::Init();

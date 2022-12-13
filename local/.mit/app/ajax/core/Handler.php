@@ -121,7 +121,7 @@ class Handler
       ->setContentType()
       ->grabDateRequest();
 
-    $reason = 'JR\\Ajax\\Reason\\' . ucfirst($this->reason);
+    $reason = 'MIT\\App\\Ajax\\Reason\\' . ucfirst($this->reason);
 
     if (!class_exists($reason))
       throw new \Exception("Undefined reason", 1);
