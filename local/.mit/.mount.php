@@ -1,5 +1,11 @@
 <?php
 
+/**
+ * mount end to bitrix/modules/main/include/prolog_before.php
+ * to end
+ * <?php require_once($_SERVER["DOCUMENT_ROOT"] . "/.mit/.mount.php"); ?>
+ */
+
 use MIT\App\Core\Autoloader;
 use MIT\App\Core\Main;
 use MIT\Loader;
