@@ -2,6 +2,8 @@
 
 namespace MIT\App\Ajax;
 
+use MIT\App\Ajax\Core\AnswerPack;
+use MIT\App\Ajax\Core\Handler;
 use const MIT\PATH_ENV;
 
 require_once __DIR__ . '/inf.php';
@@ -9,9 +11,6 @@ require_once __DIR__ . '/inf.php';
 # \--------------------------------------------------
 require_once PATH_ENV . '/bitrix/modules/main/include.php';
 # /--------------------------------------------------
-
-use MIT\App\Ajax\Core\AnswerPack;
-use MIT\App\Ajax\Core\Handler;
 
 try {
   $Handler = Handler::Init();
