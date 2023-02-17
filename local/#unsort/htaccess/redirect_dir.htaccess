@@ -1,0 +1,10 @@
+Options -Indexes
+ErrorDocument 404 /.mit/static/404.php
+
+RewriteEngine on
+
+RewriteCond %{REQUEST_URI} ^/DIR/$ [NC]
+RewriteRule .* https://somesite.ru [R=301,L]
+
+RewriteCond %{REQUEST_URI} ^/DIR/.+$ [NC]
+RewriteRule .* - [R=404,L]

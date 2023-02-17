@@ -1,0 +1,12 @@
+Options -Indexes
+ErrorDocument 404 /.mit/static/404.php
+
+RewriteEngine on
+
+#close all
+RewriteCond %{REQUEST_URI} ^.*$ [NC]
+RewriteRule .* - [R=404,L]
+
+#allow only index
+RewriteCond %{REQUEST_URI} ^/DIR/.+$ [NC]
+RewriteRule .* - [R=404,L]
