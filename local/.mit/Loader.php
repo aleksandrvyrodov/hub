@@ -2,6 +2,8 @@
 
 namespace MIT;
 
+use MIT\Model\ISingleton;
+
 class Loader
 {
 
@@ -61,9 +63,14 @@ class Loader
         } else
           throw new \Exception("[MIT] Need use inteface IIncludeDependencies for your model", 1);
       } else
-        throw new \Exception("[MIT] Undefinded model", 1);
+        throw new \Exception("[MIT] Undefinded model", 1); // 1
     }
 
     return $this->list_Model[$name];
+  }
+
+  public function loadModelInit($name): ISingleton
+  {
+    return $this->loadModel($name)::Init();
   }
 }
