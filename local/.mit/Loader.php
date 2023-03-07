@@ -71,6 +71,11 @@ class Loader
 
   public function loadModelInit($name): ISingleton
   {
-    return $this->loadModel($name)::Init();
+    $str_Model = $this->loadModel($name);
+
+    if (array_key_exists('MIT\Model\ISingleton', class_implements($str_Model)))
+      return $str_Model::Init();
+    else
+      throw new \Exception("[MIT] Model unsupport Init", 1);
   }
 }
