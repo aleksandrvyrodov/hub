@@ -629,19 +629,4 @@ final class ExchangeMod1C implements IIncludeDependencies
     return ($filter[$key] ?? false);
   }
 
-
-  /*----------*/
-
-
-  public static function SelfActiveFrom(&$arParam)
-  {
-    if (array_reverse(explode('/', $_SERVER['SCRIPT_URL']))[0] == '1c_exchange.php') {
-      if ($arParam['ACTIVE_FROM'] == 'SELF')
-        unset($arParam['ACTIVE_FROM']);
-      elseif (empty($arParam['ACTIVE_FROM']))
-        $arParam['ACTIVE_FROM'] = date('d.m.Y H:i:s');
-    }
-
-    return true;
-  }
 }
