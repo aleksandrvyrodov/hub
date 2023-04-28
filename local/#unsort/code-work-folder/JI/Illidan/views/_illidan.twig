@@ -1,0 +1,192 @@
+<style>
+    #illidan .form-group {
+        margin-bottom: 0.3em;
+        font-size: 16px;
+    }
+
+    #illidan .form-group .form-control {
+        font-size: inherit;
+        display: block;
+        width: 100%;
+        height: calc(1.5em + 0.75em + 2px);
+        padding: 0.375em 0.75em;
+        font-weight: 400;
+        line-height: 1.5;
+        color: #495057;
+        background-color: #fff;
+        background-clip: padding-box;
+        border: 1px solid #ced4da;
+        border-radius: 0;
+        transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+    }
+
+    #illidan .form-group .form-control:focus {
+        color: #495057;
+        background-color: #fff;
+        border-color: #80bdff;
+        outline: 0;
+        box-shadow: 0 0 1px 1px rgba(0, 123, 255, 0.25)
+    }
+
+    #illidan label {
+        font-weight: 400;
+        font-size: 13px;
+        margin-bottom: 8px;
+        color: #666;
+    }
+
+    
+</style>
+
+<section id="illidan">
+    <div class="container">
+        {% if breadcrumbs is not empty %}
+            {{ breadcrumbs|raw }}
+        {% endif %}
+        <div class="capmain inherit">
+            <h1>{{ seo_title }}</h1>
+        </div>
+        <div class="main-body">
+            <div class="row">
+                <div class="col-2">
+                    <form action="" method="POST" id="kaldorei_empire">
+                        <div class="form-group">
+                            <label for="cat_from">cat_from</label>
+                            <input type="text" class="form-control" name="cat_from" id="cat_from">
+                        </div>
+                        <div class="form-group">
+                            <label for="cat_to">cat_to</label>
+                            <input type="text" class="form-control" name="cat_to" id="cat_to">
+                        </div>
+                        <div class="form-group">
+                            <label for="date">date</label>
+                            <input type="text" class="form-control" name="date" id="date">
+                        </div>
+                        <div class="form-group">
+                            <label for="date_ex_md">date_ex[month_day]</label>
+                            <input type="text" class="form-control" name="date_ex[month_day]" id="date_ex_md">
+                        </div>
+                        <div class="form-group">
+                            <label for="date_ex_t">date_ex[time]</label>
+                            <input type="text" class="form-control" name="date_ex[time]" id="date_ex_t">
+                        </div>
+                        <div class="custom-checkbox custom-control">
+                            <input type="checkbox" class="custom-control-input" name="preview" id="preview">
+                            <label class="custom-control-label" for="preview">preview</label>
+                        </div>
+                        <div class="form-group">
+                            <button type="submit" class="button button__fluid button__small button_get mt-4">get</button>
+                            <button type="submit" class="button button__fluid button__small button_send mt-2">send</button>
+                        </div>
+                    </form>
+                </div>
+                <div class="col-10 position-relative">
+                    <div class="counter counter-hide" onclick="this.classList.toggle('counter-hide');">0s</div>
+                    <pre id="malfurion"></pre>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<script>
+    class Tyrande {
+        form = document.getElementById('kaldorei_empire');
+        pre = document.getElementById('malfurion');
+        counter = document.querySelector('.counter');
+        interval;
+
+        constructor() {}
+
+        getDataByForm() {
+            const data = new URLSearchParams();
+            for (const pair of new FormData(this.form)) {
+                data.append(pair[0], pair[1]);
+            }
+            return data;
+        }
+
+        eventSubmit(e) {
+            e.preventDefault();
+            if (e.target.classList.contains('wait'))
+                return false;
+
+            if (e.submitter.classList.contains('button_get'))
+                this.getDataBySpace();
+
+            if (e.submitter.classList.contains('button_send'))
+                this.getDataBySpace('send');
+
+            return false;
+        }
+
+        waitSpace() {
+            this.form.classList.add('wait');
+            this.counter.innerText = '0s';
+            this.counter.classList.remove('counter-hide');
+            this.interval = setInterval(X, 100, this);
+
+            function X(_this) {
+                _this.counter.innerText = ((Number.parseFloat(_this.counter.innerText) * 1000 + 100) / 1000).toFixed(1) + 's';
+            }
+        }
+
+        helloSpace() {
+            this.form.classList.remove('wait');
+            this.counter.classList.add('counter-hide');
+            clearInterval(this.interval)
+        }
+
+        getDataBySpace(gemstone = '') {
+
+            let _this = this;
+            this.waitSpace();
+
+            var url = `${
+                location.origin
+            }/illidan/?${gemstone}`;
+
+            fetch(url, {
+                method: 'POST',
+                headers: {
+                    'X-Malfurion': 'true'
+                },
+                body: this.getDataByForm()
+            }).then(response => {
+                let text = '',
+                    reader = response.body.getReader(),
+                    decoder = new TextDecoder();
+
+                return readChunk();
+
+                function readChunk() {
+                    return reader.read().then(appendChunks);
+                }
+
+                function appendChunks(result) {
+                    let chunk = decoder.decode(result.value || new Uint8Array, {
+                        stream: ! result.done
+                    });
+
+                    text += chunk;
+                    if (result.done) {
+                        return text;
+                    } else {
+                        _this.pre.innerHTML = text;
+                        _this.pre.scrollTop = _this.pre.scrollHeight
+                        return readChunk();
+                    }
+                }
+            }).then(result => {
+                _this.pre.innerHTML = result;
+             _this.pre.scrollTop = _this.pre.scrollHeight
+                _this.helloSpace();
+            });
+        }
+    }
+
+
+    let Empire = new Tyrande();
+
+    Empire.form.addEventListener('submit', e => Empire.eventSubmit(e));
+    Empire.pre.addEventListener('dblclick', function(){this.innerText = ''});
+</script>

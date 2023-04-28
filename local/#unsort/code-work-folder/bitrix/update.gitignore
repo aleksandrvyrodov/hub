@@ -1,0 +1,10 @@
+**/upload/tmp
+
+**/bitrix/backup
+**/bitrix/cache
+**/bitrix/managed_cache
+**/bitrix/stack_cache
+**/bitrix/tmp
+**/bitrix/wizards
+**/upload/1c_*
+**/bitrix/html_pages

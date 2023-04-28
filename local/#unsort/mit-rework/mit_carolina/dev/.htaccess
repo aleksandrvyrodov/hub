@@ -1,0 +1,33 @@
+AuthType Basic
+AuthName "Authorization"
+AuthUserFile /home/bitrix/ext_www/carolinashop.ru/.mit/.box/.htpasswd
+Require valid-user
+
+<FilesMatch ".(htaccess|htpasswd)$">
+  Order Allow,Deny
+  Deny from all
+</FilesMatch>
+
+<IfModule mod_rewrite.c>
+  # Options +FollowSymLinks
+  RewriteEngine On
+  # MIT .Sandbox
+  RewriteCond %{REQUEST_URI} ^/dev/.+$
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteRule \~(.+?)/?$ /.mit/.box/index.php?x-mode=frame&x-script=$1&x-location=%{REQUEST_URI} [L,QSA]
+  RewriteRule \@(.+?)/?$ /.mit/.box/$1.php [l]
+
+  RewriteCond %{REQUEST_URI} ^/dev/.+$
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteRule (.+?\.php)/?$ /.mit/.box/$1 [L]
+
+  RewriteCond %{REQUEST_URI} ^/dev/.+$
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteRule (.+?)/?$ /.mit/.box/$1/index.php [l]
+</IfModule>
+
+# Jgi6Wisr
+# 1Bm7n-Q2TeGmXAJ!

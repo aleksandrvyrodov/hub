@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sprite SVG</title>
+
+  <style>
+    html, body{
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      height: 100%;
+      background-color: grey;
+    }
+
+    main{
+      padding: 50px;
+      display: grid;
+      gap: 20px;
+      grid-template-columns:  repeat(auto-fill, minmax(150px, 1fr));
+    }
+
+    aside{
+      display: none;
+    }
+
+    section{
+      background-color: white;
+      border-radius: 5px;
+      padding-bottom: 100%;
+      position: relative;
+    }
+    section>div{
+      position: absolute;
+      width: 100%;
+      height: 100%;
+    }
+
+    section>div svg{
+      width: 100%;
+      height: 100%;
+      fill: red;
+    }
+    section>div img{
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: cover;
+    }
+  </style>
+</head>
+<body>
+  <aside>
+    <svg xmlns="http://www.w3.org/2000/svg" style="display:none;"> 
+      <symbol id="i1">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50">
+          <circle cx="25" cy="25" r="20" />
+        </svg>
+      </symbol>
+      <symbol id="i2">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50">
+          <rect x="5" y="5" width="40" height="40" />
+        </svg>
+      </symbol>
+      <symbol id="i3">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50">
+          <polygon points="33.284 5 16.716 5 5 16.716 5 33.284 16.716 45 33.284 45 45 33.284 45 16.716 33.284 5" />
+        </svg>
+      </symbol>
+    </svg>
+  </aside>
+  <main>
+    <section>
+      <div>
+        <svg>
+          <use xlink:href="#i1"></use>
+        </svg>
+      </div>
+    </section>
+    <!-- --- -->
+    <section>
+      <div>
+        <svg>
+          <use xlink:href="#i2"></use>
+        </svg>
+      </div>
+    </section>
+    <!-- --- -->
+    <section>
+      <div>
+        <svg>
+          <use xlink:href="#i3"></use>
+        </svg>
+      </div>
+    </section>
+    <!-- --- -->
+    <section>
+      <div>
+        <img src="rain.svg#empty">
+      </div>
+    </section>
+    <!-- --- -->
+    <section>
+      <div>
+        <img src="rain.svg#checked">
+      </div>
+    </section>
+    <!-- --- -->
+  </main>
+</body>
+</html>

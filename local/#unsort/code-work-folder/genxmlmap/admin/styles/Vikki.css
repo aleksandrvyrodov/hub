@@ -1,0 +1,31 @@
+#illidan .counter {
+    color: white;
+    position: absolute;
+    z-index: 2;
+    top: 0;
+    right: 0.75rem;
+    padding: 0.4em 0.75em;
+    transition: 0.55s;
+    height: 27px;
+    min-width: 40px;
+}
+
+#illidan .counter-hide {
+    opacity: 0.0;
+    cursor: pointer;
+    user-select: none;
+}
+
+#illidan .malfurion {
+    background-color: #333;
+    margin-bottom: 0;
+    color: white;
+    padding: 0.4em 0.75em;
+    max-height: 700px;
+    min-height: 100%;
+    overflow-y: auto;
+}
+
+#kaldorei_empire.wait {
+    opacity: 0.5 !important;
+}

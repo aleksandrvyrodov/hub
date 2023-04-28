@@ -1,0 +1,4 @@
+[Bitrix\Main\DB\SqlQueryException] 
+Mysql query error: (1271) Illegal mix of collations for operation 'UNION' (400)
+
+mysql> ALTER TABLE b_option_site CONVERT TO CHARACTER SET utf8 COLLATE utf8_unicode_ci;
