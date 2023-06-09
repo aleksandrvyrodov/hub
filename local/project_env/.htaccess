@@ -2,11 +2,12 @@ Options -Indexes
 ErrorDocument 404 /404.php
 
 <IfModule mod_php.c>
+  # BITRIX
   php_flag session.use_trans_sid off
   php_flag allow_url_fopen Off
 
-  # php_value memory_limit 1024M
-
+  # DEBUG
+  php_flag ignore_repeated_errors off
   php_flag ignore_repeated_source off
   php_flag track_errors on
   php_flag display_errors on
