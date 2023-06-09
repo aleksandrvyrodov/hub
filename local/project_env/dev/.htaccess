@@ -1,0 +1,41 @@
+AuthType Basic
+AuthName "Authorization"
+AuthUserFile %{DOCUMENT_ROOT}/.mit/.box/.htpasswd
+Require valid-user
+
+<FilesMatch ".(htaccess|htpasswd)$">
+  Order Allow,Deny
+  Deny from all
+</FilesMatch>
+
+<IfModule mod_php.c>
+  php_flag ignore_repeated_source off
+  php_flag track_errors on
+  php_flag display_errors on
+  php_flag display_startup_errors on
+  php_value error_reporting -1
+</IfModule>
+
+<IfModule mod_rewrite.c>
+  # Options +FollowSymLinks
+  RewriteEngine On
+  # MIT .Sandbox
+  RewriteCond %{REQUEST_URI} ^/dev/.+$
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteRule \~(.+?)/?$ /.mit/.box/index.php?x-mode=frame&x-script=$1&x-location=%{REQUEST_URI} [L,QSA]
+  RewriteRule \@(.+?)/?$ /.mit/.box/$1.php [l]
+
+  RewriteCond %{REQUEST_URI} ^/dev/.+$
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteRule (.+?\.php)/?$ /.mit/.box/$1 [L]
+
+  RewriteCond %{REQUEST_URI} ^/dev/.+$
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteRule (.+?)/?$ /.mit/.box/$1/index.php [l]
+</IfModule>
+
+# Jgi6Wisr
+# 1Bm7n-Q2TeGmXAJ!
