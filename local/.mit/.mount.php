@@ -15,6 +15,11 @@ require_once __DIR__         . '/.defined.php';
 require_once MIT\PATH_APP    . '/core/Autoloader.php';
 require_once MIT\PATH_VENDOR . '/autoload.php';
 
+require_once MIT\PATH_FN     . '/junkyard.php';
+require_once MIT\PATH_FN     . '/catalog.php';
+require_once MIT\PATH_FN     . '/hl.php';
+require_once MIT\PATH_FN     . '/user.php';
+
 global $MITLoader;
 
 (new Autoloader)

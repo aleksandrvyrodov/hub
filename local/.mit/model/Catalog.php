@@ -4,9 +4,8 @@ namespace MIT\Model;
 
 use MIT\Loader;
 
-class Catalog implements IIncludeDependencies, ISingleton
+class Catalog implements IIncludeDependencies
 {
-  private static $Catalog;
 
   public static function Dep(Loader $Loader): bool
   {
@@ -14,14 +13,6 @@ class Catalog implements IIncludeDependencies, ISingleton
       && $Loader->loadModule('catalog');
 
     return $res;
-  }
-
-  public static function Init(): ISingleton
-  {
-    if (empty(self::$Catalog))
-      self::$Catalog = new self();
-
-    return self::$Catalog;
   }
 
   public function __construct()

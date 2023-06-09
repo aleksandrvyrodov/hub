@@ -1,5 +1,7 @@
 <?php
 
+namespace MIT\Static\Trapper;
+
 class Assist
 {
   static public function RotateFiles($in)

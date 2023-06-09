@@ -1,0 +1,9 @@
+/*
+
+!/.gitignore
+!/.htaccess
+!/.htpasswd
+!/.dev
+!/.dev/*
+
+!/index.php

@@ -83,7 +83,7 @@ class Handler
     );
 
     if (empty($this->data_request))
-      throw new \Exception("Empty request", 1);
+      throw new \Exception("Empty request", 0);
 
     if (!isset($this->data_request['burn']))
       throw new \Exception("Incomplete data", 1);

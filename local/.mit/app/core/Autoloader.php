@@ -54,16 +54,24 @@ class Autoloader
     foreach ($this->prefixes[$prefix] as $base_dir) {
       $chunk = explode('\\', $relative_class);
       $file_name = array_pop($chunk) . '.php';
-      $relative_path = $chunk
-        ? strtolower(implode('/', $chunk)) . '/'
-        : '';
+      $step = 1;
+      do {
+        if ($step)
+          $path_full = strtolower(implode('/', $chunk));
+        else
+          $path_full = implode('/', $chunk);
 
-      $file = $base_dir
-        . $relative_path
-        . $file_name;
+        $relative_path = $chunk
+          ? $path_full . '/'
+          : '';
 
-      if ($this->requireFile($file))
-        return $file;
+        $file = $base_dir
+          . $relative_path
+          . $file_name;
+
+        if ($this->requireFile($file))
+          return $file;
+      } while ($step--);
     }
 
     return false;

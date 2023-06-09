@@ -2,15 +2,16 @@
 
 namespace MIT\App\Ajax;
 
-use MIT\App\Ajax\Core\AnswerPack;
-use MIT\App\Ajax\Core\Handler;
 use const MIT\PATH_ENV;
 
 require_once __DIR__ . '/inf.php';
 
 # \--------------------------------------------------
-require_once PATH_ENV . '/bitrix/modules/main/include.php';
+require_once PATH_ENV . '/bitrix/modules/main/include/prolog_before.php';
 # /--------------------------------------------------
+
+use MIT\App\Ajax\Core\AnswerPack;
+use MIT\App\Ajax\Core\Handler;
 
 try {
   $Handler = Handler::Init();
@@ -18,7 +19,10 @@ try {
 
   #
 } catch (\Throwable $th) {
-  $Output = Handler::errorAnswerPack($th);
+  if ($th->getCode())
+    $Output = $th->getCode()
+      ? Handler::errorAnswerPack($th)
+      : null;
 } finally {
   // header_remove();
   header('Content-Type: application/json');

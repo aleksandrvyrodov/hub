@@ -1,30 +1,43 @@
 <?php
 
-namespace MIT {
+namespace MIT\Function\Junkyard;
+
+function getDataByLink(string $url, array $options = []): string|false
+{
+  $curl = curl_init();
+  $options += [
+    CURLOPT_URL => $url,
+    CURLOPT_RETURNTRANSFER => true,
+    CURLOPT_MAXREDIRS => 10,
+    CURLOPT_TIMEOUT => 30,
+  ];
+
+  curl_setopt_array($curl, $options);
+  $data = curl_exec($curl);
+
+  try {
+    if (curl_errno($curl))
+      throw new \Exception('curl_error');
+
+    if (empty($data))
+      throw new \Exception('curl_empty');
+  } catch (\Throwable $th) {
+    $data = false;
+  } finally {
+    curl_close($curl);
+  }
+
+  return $data;
 }
 
-namespace MIT\CATALOG {
+function GUIDv4(): string {
+  if (function_exists('com_create_guid') === true)
+      return trim(com_create_guid(), '{}');
 
-  /**
-   * Sort property by field 'sort'
-   *  @param int $sort
-   *  @param int $group = PROP_MAIN_CARD
-   *  @param int $quantity = PROP_MAX_COUNT_GROUP
-   *
-   *  @return bool
-   */
-  function property_filter(int $sort, int $group = PROP_MAIN_CARD,  int $quantity = PROP_MAX_COUNT_GROUP): bool
-  {
-    $alfa = $sort - $group;
+  $data = openssl_random_pseudo_bytes(16);
 
-    if ($alfa >= 0) {
-      if ($quantity === PROP_INF_COUNT_GROUP)
-        return true;
-      elseif ($alfa < $quantity)
-        return true;
-      else
-        return false;
-    } else
-      return false;
-  }
+  $data[6] = chr(ord($data[6]) & 0x0f | 0x40);
+  $data[8] = chr(ord($data[8]) & 0x3f | 0x80);
+
+  return vsprintf('%s%s-%s-%s-%s-%s%s%s', str_split(bin2hex($data), 4));
 }
