@@ -9,7 +9,7 @@ require_once __DIR__ . '/../.defined.php';
 function save_log($c, $time = 'S')
 {
   $content[0] = PHP_EOL . PHP_EOL;
-  $content[1] = '$DT___' . date('y_m_d__H_i_s') . "___{$time}" . ' = ';
+  $content[1] = '$DT___' . date('y_m_d__H_i_s') . '___' . hrtime(true) . "___{$time}" . ' = ';
   $content[2] = ';' . PHP_EOL . PHP_EOL;
   $content[3] = '/*  ================================================================  */';
 
@@ -47,7 +47,7 @@ function ReStart($mes)
     `kill SIGKILL $PID`;
 
     exit();
-  }else
+  } else
     throw new Exception("Failed restart", 1);
 };
 

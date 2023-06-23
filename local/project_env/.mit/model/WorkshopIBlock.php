@@ -379,9 +379,36 @@ final class WorkshopIBlock extends WorkshopUnity implements IIncludeDependencies
     return self::$Result;
   }
 
-  static private function _CountRowPropertyList(int $propertyIdRoot, int $propertyIdTarget)
+  static private function _RowsPropertyList(int $propertyIdRoot, int $propertyIdTarget)
   {
-    return (new \Bitrix\Main\Entity\Query(\Bitrix\Iblock\PropertyEnumerationTable::getEntity()))
+    $X = [];
+    $Res = (new \Bitrix\Main\Entity\Query(\Bitrix\Iblock\PropertyEnumerationTable::getEntity()))
+      ->registerRuntimeField(
+        'taret',
+        array(
+          'data_type' => \Bitrix\Iblock\PropertyEnumerationTable::class,
+          'reference' => [
+            '=this.XML_ID' => 'ref.XML_ID',
+            'ref.PROPERTY_ID' => new \Bitrix\Main\DB\SqlExpression('?', $propertyIdTarget),
+          ],
+          'join_type' => 'LEFT'
+        )
+      )
+
+      ->setSelect(['XML_ID', 'VALUE', 'DEF', 'SORT', 'taret.ID'])
+      ->setFilter([
+        'PROPERTY_ID' => $propertyIdRoot,
+        '!taret.XML_ID' => false,
+      ])
+      ->setOrder(['SORT' => 'ASC'])
+      ->exec();
+
+    while ($tempX = $Res->fetch()) {
+      $X[$tempX['IBLOCK_PROPERTY_ENUMERATION_taret_ID']] = $tempX;
+      unset($X[$tempX['IBLOCK_PROPERTY_ENUMERATION_taret_ID']]['IBLOCK_PROPERTY_ENUMERATION_taret_ID']);
+    }
+
+    $Y = (new \Bitrix\Main\Entity\Query(\Bitrix\Iblock\PropertyEnumerationTable::getEntity()))
       ->registerRuntimeField(
         'taret',
         array(
@@ -397,11 +424,13 @@ final class WorkshopIBlock extends WorkshopUnity implements IIncludeDependencies
       ->setSelect(['XML_ID', 'VALUE', 'DEF', 'SORT'])
       ->setFilter([
         'PROPERTY_ID' => $propertyIdRoot,
-        '!taret.XML_ID' => false,
+        'taret.XML_ID' => false,
       ])
       ->setOrder(['SORT' => 'ASC'])
       ->exec()
-      ->getSelectedRowsCount();
+      ->fetchAll();
+
+    return [$X, $Y];
   }
 
   public function CopyIBlockProperty(?PropertyFilter $Filter = null): Result
@@ -452,14 +481,16 @@ final class WorkshopIBlock extends WorkshopUnity implements IIncludeDependencies
       unset($property['ID'], $property['TARGET__XML_ID'], $property['TARGET__ID']);
 
       if ($filterBit & 0b10)
-        $property['VALUES'] = \Bitrix\Iblock\PropertyEnumerationTable::getList([
+        $propertyCountRoot = \Bitrix\Iblock\PropertyEnumerationTable::getList([
           'select' => ['XML_ID', 'VALUE', 'DEF', 'SORT'],
           'filter' => ['PROPERTY_ID' => $propertyIdRoot],
           'order' => ['SORT' => 'ASC', 'DEF' => 'ASC']
-        ])->fetchAll();
+        ])->getSelectedRowsCount();
 
-      if ($filterBit === 0b11 && count($property['VALUES']) !== self::_CountRowPropertyList($propertyIdRoot, $propertyIdTarget))
+      if ($filterBit === 0b11 && $propertyCountRoot !== count(($RPL = self::_RowsPropertyList($propertyIdRoot, $propertyIdTarget))[0])) {
+        $property['VALUES'] = $RPL[0] + $RPL[1];
         $iblockPropertyTarget->UpdateEnum($propertyIdTarget, $property['VALUES'], false);
+      }
 
       if (~$filterBit & 0b01) {
         $propertyIdTarget = $iblockPropertyTarget->Add($property);
