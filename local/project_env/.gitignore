@@ -3,13 +3,18 @@
 
 #bitrix folder
 
-/upload
+**/tmp
+
+/bitrix/catalog_export
+/bitrix/updates
+
+/upload/*
+!/upload
+!/upload/.htaccess
+
 /bitrix/wizards
 /bitrix/catalog_export
-/bitrix/tmp
-/bitrix/updates
-/bitrix/images
-
+/bitrix/updates*
 
 /bitrix/cache/*
 !/bitrix/cache
@@ -27,20 +32,16 @@
 !/bitrix/backup
 !/bitrix/backup/index.php
 
-/bitrix/modules/*/install/*
+/bitrix/modules/*/install/
 !/bitrix/modules/*/install
 !/bitrix/modules/*/install/version.php
 
-#media files
+/mysql_debug.sql
 
-# исключаем все текстовые и подобные ресурсы (на нашей практике они всегда излишни)
-*.xml
-*.html
 *.txt
 *.log
 *.css.map
 
-# архивы, включая многотомные
 *.zip
 *.zip*
 *.tar
@@ -51,21 +52,7 @@
 *.gz*
 *.tgz
 *.tgz*
-*.sql
 *.rar
-.hg
-.ftpconfig
-*.doc
-*.docx
-*.pdf
-*.rtf
-*.xls
-*.xlsx
-*.ppt
-*.pptx
-*.psd
-*.psb
-*.sketch
 
 composer.phar
 vendor/
