@@ -130,6 +130,7 @@ try {
         ;
 
         $COUNTER++;
+        $SkipT = true;
       } catch (\Throwable $th) {
         if (($SkipT = ($th->getCode() === -2)) || $th->getCode() === -3)
           $WIB->Log('SKIP > ' . $th->getMessage(), 1);

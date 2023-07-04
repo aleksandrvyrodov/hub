@@ -356,7 +356,7 @@ final class WorkshopIBlock extends WorkshopUnity implements IIncludeDependencies
     $iblockFields["LIST_PAGE_URL"] = '';
     $iblockFields["SECTION_PAGE_URL"] = '';
     $iblockFields["DETAIL_PAGE_URL"] = '#PRODUCT_URL#?oid=#ID#';
-    $iblockFields["DETAIL_PAGE_URL"] = '';
+    $iblockFields["CANONICAL_PAGE_URL"] = '';
 
     unset($iblockFields["ID"], $iblockFields["LID"]);
 
@@ -474,6 +474,7 @@ final class WorkshopIBlock extends WorkshopUnity implements IIncludeDependencies
 
       $property['IBLOCK_ID'] = $iblockIdTarget;
       $property['ACTIVE'] = 'Y';
+      $property['SECTION_PROPERTY'] = 'Y';
       // $property['SMART_FILTER'] = 'Y';
       // $property['DISPLAY_TYPE'] = $property['MULTIPLE'] == 'N' ? 'P' : 'F';
       $property['DISPLAY_TYPE'] = 'F';
@@ -509,11 +510,23 @@ final class WorkshopIBlock extends WorkshopUnity implements IIncludeDependencies
 
 
       $iblockPropertyRoot = new \CIBlockProperty();
-      $iblockPropertyRoot->Update($propertyIdRoot, ['ACTIVE' => 'Y']);
+      $iblockPropertyRoot->Update($propertyIdRoot, [
+        'ACTIVE' => 'Y',
+        'SMART_FILTER' => 'N',
+        'SECTION_PROPERTY' => 'N',
+        'IBLOCK_ID' => $iblockIdRoot
+      ]);
+      $ResultPF = \Bitrix\Iblock\Model\PropertyFeature::setFeatures($propertyIdRoot, [
+        ["FEATURE_ID" => "LIST_PAGE_SHOW", "IS_ENABLED" => "N", "MODULE_ID" => "iblock"],
+        ["FEATURE_ID" => "DETAIL_PAGE_SHOW", "IS_ENABLED" => "N", "MODULE_ID" => "iblock"],
+        ["FEATURE_ID" => "IN_BASKET", "IS_ENABLED" => "N", "MODULE_ID" => "catalog"],
+      ]);
+      if (!$ResultPF->isSuccess())
+        self::_ErrorGenerator("[#WIB-B03b] Ошибка установки параметров свойств " . implode(PHP_EOL, $ResultPF->getErrorMessages()));
 
       $property['CODE'] !== 'CML2_ARTICLE'
         && self::registerDelayFn(
-          fn () => $iblockPropertyRoot->Update($propertyIdRoot, ['ACTIVE' => 'N'])
+          fn () => 1#$iblockPropertyRoot->Update($propertyIdRoot, ['ACTIVE' => 'N'])
         );
 
       #
