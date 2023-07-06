@@ -37,6 +37,8 @@
 !/bitrix/modules/*/install/version.php
 
 /mysql_debug.sql
+/sitemap*.xml
+/yandex_*.html
 
 *.txt
 *.log
