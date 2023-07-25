@@ -47,7 +47,7 @@ function alertSectionTrigerMarkup(int $SECTION_ID = 0, array|false $PROP_VAL = f
     $arFields = $ob->GetFields();
 
     ob_start();
-    ?>
+?>
     <div class="callback-block animate-load font_upper_sm colored" data-event="jqm" data-name="section" data-param-type="section" data-param-code="<?= $arFilterPack['CODE'] ?>" data-param-val="<?= implode(':', $arFilterPack['VAL']) ?>">
       <i class="svg  svg-inline-info_big pull-left" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16">
           <defs>
@@ -62,7 +62,7 @@ function alertSectionTrigerMarkup(int $SECTION_ID = 0, array|false $PROP_VAL = f
         </svg></i>
       <span><?= $arFields['~NAME'] ?></span>
     </div>
-    <?
+<?
 
     $markup .= ob_get_contents();
     ob_end_clean();
@@ -108,15 +108,43 @@ function modifyProductByExchange1C(...$args)
   include_once __DIR__ . '/../static/1c-exchange.php';
 }
 
-function targetPriceInSmartFilter(array $items):int
+function targetPriceInSmartFilter(array $items): int
 {
   $priceIdTarget = in_array(SECOND_TARGET_PRICE_ID, array_values(array_map(
-    fn($item) => $item['ID'],
-    array_filter($items, fn($item)=>((bool)($item['PRICE'] ?? false))
-      ? !($item["VALUES"]["MAX"]["VALUE"] - $item["VALUES"]["MIN"]["VALUE"] <= 0)
-      : false
+    fn ($item) => $item['ID'],
+    array_filter(
+      $items,
+      fn ($item) => ((bool)($item['PRICE'] ?? false))
+        ? !($item["VALUES"]["MAX"]["VALUE"] - $item["VALUES"]["MIN"]["VALUE"] <= 0)
+        : false
     )
   ))) ? SECOND_TARGET_PRICE_ID : MAIN_TARGET_PRICE_ID;
 
   return $priceIdTarget;
+}
+
+function forciblyQuantity(\Bitrix\Catalog\Model\Event $event)
+{
+  static $store_id = [];
+
+  $result = new \Bitrix\Catalog\Model\EventResult();
+  $arParams = $event->getParameters('fields');
+
+  $arFields = &$arParams['fields'];
+  $id = &$arParams['id'];
+
+  $fn_ReadStore = function($id) use (&$store_id){
+    $Q = $store_id[(int)$id];
+    unset($store_id[(int)$id]);
+    return $Q;
+  };
+
+  if ($arFields['TYPE'] === 3)
+    $result->modifyFields(($_ = [
+      'QUANTITY' => $fn_ReadStore($id) ?? $arFields['QUANTITY']
+    ] + $arFields));
+  elseif((int)\CCatalogProduct::GetList([], ['ID' => $id], false, false, ['TYPE'])->Fetch()['TYPE'] === 3)
+      $store_id[(int)$id] = $arFields['QUANTITY'];
+
+  return $result;
 }

@@ -103,14 +103,14 @@ try {
 
         $WIBP = new WorkshopIBlockProduct($WIBE);
         $WIBP
+          ->Log('Копирование основной информации продукта >>', 2)
+          ->checkedChain($WIBP->CopyProductMain())
+          ->Log('<< ----', 2)
           ->Log('Копирование информации о складах продукта >>', 2)
           ->checkedChain($WIBP->CopyProductStore(), false)
           ->Log('<< ----', 2)
           ->Log('Копирование информации о прайсах продукта >>', 2)
           ->checkedChain($WIBP->CopyProductPrice(), false)
-          ->Log('<< ----', 2)
-          ->Log('Копирование основной информации продукта >>', 2)
-          ->checkedChain($WIBP->CopyProductMain())
           ->Log('<< ----', 2)
           #
         ;
