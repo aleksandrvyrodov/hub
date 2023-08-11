@@ -1,0 +1,9 @@
+AuthType Basic
+AuthName "Authorization"
+AuthUserFile /путь_до_директории/.htpasswd
+Require valid-user
+
+<FilesMatch ".(htaccess|htpasswd)$">
+	Order Allow,Deny
+	Deny from all
+</FilesMatch>

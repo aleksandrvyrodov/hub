@@ -1,0 +1,72 @@
+{
+  "folders": [
+    {
+      "name": "Project",
+      "path": "local"
+    },
+    {
+      "name": "Source",
+      "path": "ssrc"
+    }
+  ],
+  "settings": {
+    "workbench.colorTheme": "Night Owl",
+    "workbench.colorCustomizations": {
+      "tab.activeBorder": "#107C10",
+      "statusBar.background": "#107C10",
+      "statusBar.border": "#18BA18",
+      "statusBar.foreground": "#e7e7e7",
+      "statusBarItem.hoverBackground": "#139613",
+      "statusBarItem.activeBackground": "#19A719",
+    },
+    "workbench.editor.wrapTabs": true,
+    "editor.fontFamily": "'Fira Code', Consolas, 'Courier New', monospace",
+    "editor.fontLigatures": true,
+    "editor.fontWeight": "300",
+    "editor.fontSize": 14,
+    "editor.formatOnPaste": true,
+    "editor.formatOnSave": true,
+    "editor.formatOnSaveMode": "file",
+    "editor.formatOnType": true,
+    "editor.suggest.showStatusBar": true,
+    "editor.detectIndentation": false,
+    "editor.guides.bracketPairsHorizontal": true,
+    "explorer.fileNesting.enabled": true,
+    "explorer.fileNesting.expand": true,
+    "diffEditor.codeLens": true,
+    "files.trimTrailingWhitespace": true,
+    "files.autoSave": "afterDelay",
+    "files.autoGuessEncoding": true,
+    "files.eol": "\n",
+    /* "files.associations": {
+			"*.html": "twig"
+		}, */
+    "html.format.wrapLineLength": 0,
+    "html.format.enable": true,
+    "[html]": {
+      "editor.defaultFormatter": "vscode.html-language-features"
+    },
+    "[twig]": {
+      "editor.defaultFormatter": "mblode.twig-language-2"
+    },
+    "[scss]": {
+      "editor.defaultFormatter": "Wscats.eno",
+    },
+    "[markdown]": {
+      "editor.wordWrap": "on",
+      "editor.quickSuggestions": {
+        "comments": "off",
+        "strings": "off",
+        "other": "off"
+      },
+      "editor.renderWhitespace": "boundary",
+      "files.trimTrailingWhitespace": false,
+    },
+    "emmet.includeLanguages": {
+      "twig": "html"
+    },
+    "twig-language-2.indentStyle": "space",
+    "twig-language-2.tabSize": 4,
+    "compile-hero.disable-compile-files-on-did-save-code": true,
+  },
+}

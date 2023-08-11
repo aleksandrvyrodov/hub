@@ -1,0 +1,66 @@
+{
+  "folders": [
+    {
+      "name": "Project",
+      "uri": "vscode-remote://[host]"
+    },
+  ],
+  "remoteAuthority": "ssh-remote+[host]",
+  "settings": {
+    "workbench.colorTheme": "Night Owl",
+    "workbench.colorCustomizations": {
+      "tab.activeBorder": "#007ACC",
+      "statusBar.background": "#005C99",
+      "statusBar.border": "#007ACC",
+      "statusBar.foreground": "#f7f7f7",
+      "statusBarItem.hoverBackground": "#17374D",
+      "statusBarItem.activeBackground": "#4099D5",
+    },
+    "workbench.editor.wrapTabs": true,
+    "editor.fontFamily": "'Fira Code', Consolas, 'Courier New', monospace",
+    "editor.fontLigatures": true,
+    "editor.fontWeight": "300",
+    "editor.fontSize": 14,
+    "editor.formatOnPaste": true,
+    "editor.formatOnSave": true,
+    "editor.formatOnSaveMode": "file",
+    "editor.formatOnType": true,
+    "editor.suggest.showStatusBar": true,
+    "editor.detectIndentation": false,
+    "diffEditor.codeLens": true,
+    "files.trimTrailingWhitespace": true,
+    "files.autoSave": "off",
+    "files.autoGuessEncoding": true,
+    /* "files.associations": {
+				"*.html": "twig"
+			}, */
+    "html.format.wrapLineLength": 0,
+    "html.format.enable": true,
+    "[html]": {
+      "editor.defaultFormatter": "vscode.html-language-features"
+    },
+    "[twig]": {
+      "editor.defaultFormatter": "mblode.twig-language-2"
+    },
+    "[scss]": {
+      "editor.defaultFormatter": "Wscats.eno",
+    },
+    "[markdown]": {
+      "editor.wordWrap": "on",
+      "editor.quickSuggestions": {
+        "comments": "off",
+        "strings": "off",
+        "other": "off"
+      },
+      "editor.renderWhitespace": "boundary",
+      "files.trimTrailingWhitespace": false,
+    },
+    "emmet.includeLanguages": {
+      "twig": "html"
+    },
+    "twig-language-2.indentStyle": "space",
+    "twig-language-2.tabSize": 4,
+    "compile-hero.disable-compile-files-on-did-save-code": true,
+    "editor.stickyScroll.enabled": true,
+  },
+}

@@ -1,0 +1,15 @@
+Order Allow,Deny
+Allow from all
+
+AuthType Basic
+AuthName "Authorization"
+AuthUserFile /[path]/.htpasswd
+Require valid-user
+
+<FilesMatch ".(htaccess|htpasswd)$">
+  Order Allow,Deny
+  Deny from all
+</FilesMatch>
+
+# Jgi6Wisr
+# 1Bm7n-Q2TeGmXAJ!
