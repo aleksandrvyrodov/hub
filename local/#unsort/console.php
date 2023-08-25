@@ -12,7 +12,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     try {
       ob_start(); {
-        $result = eval(preg_replace('/^<\?(php)?/i', '', $_POST['code']));
+        $result = eval(preg_replace('/^\<\?(php)?/i', '', $_POST['code']));
         $result = ob_get_contents() . PHP_EOL . $result;
       }
       ob_get_clean();
@@ -131,7 +131,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   <form action="" method="post" target="run" id="run">
     <div class="run-area">
       <div class="btn--wrap">
-        <button class="btn" type="submit" name="send" value="1"><svg width="180px" height="60px" viewBox="0 0 180 60" class="border">
+        <button id="send" class="btn" type="submit" name="send" value="1"><svg width="180px" height="60px" viewBox="0 0 180 60" class="border">
             <polyline points="179,1 179,59 1,59 1,1 179,1" class="bg-line" />
             <polyline points="179,1 179,59 1,59 1,1 179,1" class="hl-line" />
           </svg>
@@ -166,6 +166,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     const editorCodeLogview = document.getElementById("editorCodeLogview");
     const form = document.getElementById("run");
     const code = document.getElementById("code");
+    const send = document.getElementById("send");
     const frame = document.getElementById("frame");
 
     require.config({
@@ -192,18 +193,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       let log = editorCodeLogview ? createEditor(editorCodeLogview, 'text/plain', `<?= defined('LOG_VIEW') ? @file_get_contents(LOG_VIEW) : 'FAIL' ?>`) : false;
 
       form.onsubmit = (e) => {
+        console.log(e);
         if (e.submitter.name != 'send')
           e.preventDefault();
         else
           code.value = editor.getValue();
       }
       frame.onload = (e) => {
-        console.log(frame.contentDocument);
-
         result.setValue(frame.contentDocument.getElementById('result').innerText);
         if (log)
           log.setValue(frame.contentDocument.getElementById('log').innerText);
       }
+      editorCode.addEventListener('keydown', e => {
+        if(e.keyCode == 13 && e.ctrlKey)
+          send.click();
+      });
       window.onunload = function() {
         sessionStorage.setItem('code', editor.getValue());
       };
