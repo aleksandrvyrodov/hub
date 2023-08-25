@@ -87,7 +87,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     function run(e, editor) {
 
-      if (e.keyCode === 116 && !e.ctrlKey) {
+      if (e.keyCode === 13 && !e.ctrlKey) {
         e.preventDefault();
         code.value = editor.getValue();
         form.submit();
