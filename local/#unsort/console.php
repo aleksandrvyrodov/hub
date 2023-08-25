@@ -4,7 +4,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     @include_once $_SERVER['DOCUMENT_ROOT'] . '/bitrix/modules/main/include/prolog_before.php';
 
     header('Content-type: text/plain');
-    echo eval(preg_replace('/^<\?(php)?/i','',$_POST['code']));
+    echo eval(preg_replace('/^<\?(php)?/i', '', $_POST['code']));
   }
 
   exit();
@@ -34,13 +34,77 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       display: grid;
       height: 100%;
       grid-template-columns: repeat(2, 1fr);
-      grid-template-rows: 1fr;
+      grid-template-rows: auto 1fr;
+    }
+
+    .run-area {
+      padding: 1rem 0;
+      display: flex;
+      justify-content: center;
+      grid-column: 1 / span 2;
+    }
+
+    .run-area button {
+      font-size: 16px;
+      font-weight: 700;
+    }
+
+    .btn--wrap {
+      width: 180px;
+      height: 60px;
+      position: relative;
+    }
+
+    .btn {
+      width: inherit;
+      height: inherit;
+      cursor: pointer;
+      background: transparent;
+      border: 1px solid #91C9FF;
+      outline: none;
+      transition: 1s ease-in-out;
+    }
+
+    svg {
+      position: absolute;
+      left: 0;
+      top: 0;
+      fill: none;
+      stroke: #fff;
+      stroke-dasharray: 150 480;
+      stroke-dashoffset: 150;
+      transition: 1s ease-in-out;
+    }
+
+    .btn:hover {
+      transition: 1s ease-in-out;
+      background: #4F95DA;
+    }
+
+    .btn:hover svg {
+      stroke-dashoffset: -480;
+    }
+
+    .btn span {
+      color: white;
+      font-size: 18px;
+      font-weight: 100;
     }
   </style>
 </head>
 
 <body>
   <form action="" method="post" target="run" id="run">
+    <div class="run-area">
+      <div class="btn--wrap">
+        <button class="btn" type="submit" name="send" value="1"><svg width="180px" height="60px" viewBox="0 0 180 60" class="border">
+            <polyline points="179,1 179,59 1,59 1,1 179,1" class="bg-line" />
+            <polyline points="179,1 179,59 1,59 1,1 179,1" class="hl-line" />
+          </svg>
+          <span>|></span>
+        </button>
+      </div>
+    </div>
     <div id="editorCode"></div>
     <div id="editorCodeResult"></div>
     <input type="hidden" name="code" id="code">
@@ -73,26 +137,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     require(["vs/editor/editor.main"], function() {
       let editor = createEditor(editorCode, 'php', "\<\?php\r\n\r\n");
-
       let result = createEditor(editorCodeResult, 'text/plain', '');
 
-      window.onkeydown = e => run(e, editor);
-      window.onkeypress = e => run(e, editor);
-
+      form.onsubmit = (e) => {
+        if (e.submitter.name != 'send')
+          e.preventDefault();
+      }
       frame.onload = (e) => {
         result.setValue(frame.contentDocument.body.innerText);
       }
 
     });
-
-    function run(e, editor) {
-
-      if (e.keyCode === 13 && !e.ctrlKey) {
-        e.preventDefault();
-        code.value = editor.getValue();
-        form.submit();
-      }
-    }
 
     function createEditor(editorContainer, lang, val) {
       return monaco.editor.create(editorContainer, {
