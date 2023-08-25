@@ -23,7 +23,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     $log = defined('LOG_VIEW') ? @file_get_contents(LOG_VIEW) : '';
 
-    if(!defined('LOG_VIEW')){
+    if (!defined('LOG_VIEW')) {
       $result = $log_ext . $result;
     }
 
@@ -185,7 +185,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     };
 
     require(["vs/editor/editor.main"], function() {
-      let editor = createEditor(editorCode, 'php', "\<\?php\r\n\r\n");
+      let storageCode = sessionStorage.getItem('code');
+
+      let editor = createEditor(editorCode, 'php', storageCode ? storageCode : "\<\?php\r\n\r\n");
       let result = createEditor(editorCodeResult, 'text/plain', '');
       let log = editorCodeLogview ? createEditor(editorCodeLogview, 'text/plain', `<?= defined('LOG_VIEW') ? @file_get_contents(LOG_VIEW) : 'FAIL' ?>`) : false;
 
@@ -202,6 +204,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if (log)
           log.setValue(frame.contentDocument.getElementById('log').innerText);
       }
+      window.onunload = function() {
+        sessionStorage.setItem('code', editor.getValue());
+      };
 
     });
 
