@@ -1,10 +1,36 @@
 <?php
+
+// define('LOG_VIEW', '/home/cvetopt/domains/cvetopttorg.spb.ru/public_html/.souls/logs/error_bx.log');
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   if (isset($_POST['code'])) {
     @include_once $_SERVER['DOCUMENT_ROOT'] . '/bitrix/modules/main/include/prolog_before.php';
 
-    header('Content-type: text/plain');
-    echo eval(preg_replace('/^<\?(php)?/i', '', $_POST['code']));
+    header('Content-type: text/html');
+
+    $log_ext = '';
+
+    try {
+      ob_start(); {
+        $result = eval(preg_replace('/^<\?(php)?/i', '', $_POST['code']));
+        $result = ob_get_contents() . PHP_EOL . $result;
+      }
+      ob_get_clean();
+    } catch (\Throwable $th) {
+      $log_ext = $th->__toString() . PHP_EOL . '==============================================' . PHP_EOL . PHP_EOL;
+      $result = 'FAIL!';
+    }
+
+    $log = defined('LOG_VIEW') ? @file_get_contents(LOG_VIEW) : '';
+
+    if(!defined('LOG_VIEW')){
+      $result = $log_ext . $result;
+    }
+
+    echo <<<HTML
+      <div id="result">$result</div>
+      <div id="log">$log_ext$log</div>
+      HTML;
   }
 
   exit();
@@ -26,6 +52,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       margin: 0;
       padding: 0;
       background: #1e1e1e;
+      background: #1C1B21;
       width: 100vw;
       height: 100vh;
     }
@@ -35,6 +62,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       height: 100%;
       grid-template-columns: repeat(2, 1fr);
       grid-template-rows: auto 1fr;
+      padding: 0.75rem;
+      gap: 0.75rem;
+      box-sizing: border-box;
+    }
+
+    .editor-area {
+      border: 1px solid #91C9FF81
     }
 
     .run-area {
@@ -105,8 +139,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         </button>
       </div>
     </div>
-    <div id="editorCode"></div>
-    <div id="editorCodeResult"></div>
+    <div class="editor-area" id="editorCode"></div>
+    <div class="editor-area" id="editorCodeResult"></div>
+    <? if (defined('LOG_VIEW')) : ?>
+      <style>
+        form {
+          grid-template-rows: auto 2fr 1fr;
+        }
+
+        #editorCode {
+          grid-row: 2 / span 2;
+        }
+      </style>
+      <div class="editor-area" id="editorCodeLogview"></div>
+      <input type="hidden" name="log" id="log">
+    <? endif; ?>
+    <div id="editorCodeLog"></div>
     <input type="hidden" name="code" id="code">
   </form>
   <iframe frameborder="0" name="run" id="frame" style="display: none;" src="javascript:void(0)"></iframe>
@@ -115,6 +163,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     const CSS_LINKS = [`https://cdn.jsdelivr.net/npm/bootstrap/dist/css/bootstrap.min.css`];
     const editorCode = document.getElementById("editorCode");
     const editorCodeResult = document.getElementById("editorCodeResult");
+    const editorCodeLogview = document.getElementById("editorCodeLogview");
     const form = document.getElementById("run");
     const code = document.getElementById("code");
     const frame = document.getElementById("frame");
@@ -138,13 +187,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     require(["vs/editor/editor.main"], function() {
       let editor = createEditor(editorCode, 'php', "\<\?php\r\n\r\n");
       let result = createEditor(editorCodeResult, 'text/plain', '');
+      let log = editorCodeLogview ? createEditor(editorCodeLogview, 'text/plain', `<?= defined('LOG_VIEW') ? @file_get_contents(LOG_VIEW) : 'FAIL' ?>`) : false;
 
       form.onsubmit = (e) => {
         if (e.submitter.name != 'send')
           e.preventDefault();
+        else
+          code.value = editor.getValue();
       }
       frame.onload = (e) => {
-        result.setValue(frame.contentDocument.body.innerText);
+        console.log(frame.contentDocument);
+
+        result.setValue(frame.contentDocument.getElementById('result').innerText);
+        if (log)
+          log.setValue(frame.contentDocument.getElementById('log').innerText);
       }
 
     });
