@@ -205,8 +205,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
           log.setValue(frame.contentDocument.getElementById('log').innerText);
       }
       editorCode.addEventListener('keydown', e => {
-        if(e.keyCode == 13 && e.ctrlKey)
+        if (e.altKey && e.ctrlKey) {
+          e.preventDefault();
           send.click();
+        }
       });
       window.onunload = function() {
         sessionStorage.setItem('code', editor.getValue());
