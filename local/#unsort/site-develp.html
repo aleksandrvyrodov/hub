@@ -1,0 +1,61 @@
+<style>
+	:root{
+		--grey-semi-color: #868585;
+		--speed: 0.34s;
+	}
+	
+	.footer-dev {
+	  color: var(--grey-semi-color);
+	  font-size: 0.8rem
+	}
+
+	.footer-dev a {
+	  color: inherit;
+	  text-decoration: underline;
+	  display: inline-block;
+	  position: relative;
+	  font-weight: 700
+	}
+
+	.footer-dev a span {
+	  transition: inherit;
+	  position: relative;
+	  z-index: 2
+	}
+
+	.footer-dev a::before {
+	  content: "";
+	  z-index: 1;
+	  transition: opacity var(--speed) ease-in;
+	  opacity: 0;
+	  border: 1px solid #0059ab;
+	  border-radius: 50%;
+	  border-right-width: 5px;
+	  border-left: 0px;
+	  display: block;
+	  height: 1.65em;
+	  left: calc(50% + 6px);
+	  top: calc(50% + 1px);
+	  transform: translate(-50%, -50%);
+	  position: absolute;
+	  width: 107%
+	}
+
+	.footer-dev a:hover {
+	  opacity: 1;
+	  text-decoration: none
+	}
+
+	.footer-dev a:hover::before {
+	  opacity: 1
+	}
+
+	.footer-dev a:hover span:first-child {
+	  color: #1a1819
+	}
+
+	.footer-dev a:hover span:last-child {
+	  color: #f11b27
+	}
+</style>
+<span class="footer-dev">Сайт разработан: <a href="https://master-it.spb.ru/" target="_blank"><span>Мастер</span> <span>IT</span></a>
