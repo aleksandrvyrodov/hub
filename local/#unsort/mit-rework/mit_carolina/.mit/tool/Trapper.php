@@ -4,19 +4,21 @@ namespace MIT\Tool;
 
 class Trapper
 {
+  const CATCH_BEFORE = 1;
 
   private static $BufferLock = true;
   private static $Buffer = '';
+  private static $BufferBeforeInit = '';
   private static \Closure $BufferHandler;
   private static object $BufferHandlerContext;
 
   private static ?Trapper $Inited = null;
 
   #region Single
-  public static function InitOnce(): Trapper
+  public static function InitOnce(int $catch = 0): Trapper
   {
     if (empty(self::$Inited))
-      self::$Inited = new self();
+      self::$Inited = new self($catch);
     else
       throw new \Exception("Trapper already creation", 1);
 
@@ -29,7 +31,7 @@ class Trapper
   }
   #endregion
 
-  private function __construct()
+  private function __construct(int $catch)
   {
     empty(self::$BufferHandler)
       && self::$BufferHandler = fn ($buffer) => $buffer;
@@ -38,6 +40,9 @@ class Trapper
       && self::$BufferHandlerContext = new class()
       {
       };
+
+    $catch
+      && self::$BufferBeforeInit = ob_get_contents();
 
     ob_start(
       fn ($buffer) => self::Jail($buffer)
@@ -81,7 +86,7 @@ class Trapper
 
   static public function JailCallbak()
   {
-    return self::$BufferHandler->call(self::$BufferHandlerContext, self::$Buffer);
+    return self::$BufferHandler->call(self::$BufferHandlerContext, self::$Buffer, self::$BufferBeforeInit);
   }
   #endregion
 

@@ -13,12 +13,13 @@ use MIT\Loader;
 
 require_once __DIR__         . '/.defined.php';
 require_once MIT\PATH_APP    . '/core/Autoloader.php';
-require_once MIT\PATH_VENDOR . '/autoload.php';
+// require_once MIT\PATH_VENDOR . '/autoload.php';
 
 require_once MIT\PATH_FN     . '/junkyard.php';
 require_once MIT\PATH_FN     . '/catalog.php';
 require_once MIT\PATH_FN     . '/hl.php';
 require_once MIT\PATH_FN     . '/user.php';
+require_once MIT\PATH_FN     . '/order.php';
 
 global $MITLoader;
 
@@ -26,8 +27,8 @@ global $MITLoader;
   ->addNamespace('MIT', MIT\PATH_ROOT)
   ->register();
 
-!defined('MIT\\MANUAL_ASSEMBLY')
+/* !defined('MIT\\MANUAL_ASSEMBLY')
   && (new Main)
-  ->includeLibAll();
+  ->includeLibAll(); */
 
 $MITLoader = Loader::Init();

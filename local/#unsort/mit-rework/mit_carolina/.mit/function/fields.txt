@@ -1,0 +1,281 @@
+array (
+  'LOGIN' => 'a@0x41.ru',
+  'EMAIL' => 'a@0x41.ru',
+  'PHONE_NUMBER' => '+7 (921) 645-47-53',
+  'PASSWORD' => '1290as!@',
+  'CONFIRM_PASSWORD' => '1290as!@',
+  'LAST_NAME' => 'Выродов',
+  'NAME' => 'Александр',
+  'SECOND_NAME' => 'Игоревич',
+  'PERSONAL_PHONE' => '+7 (921) 645-47-53',
+  'GROUP_ID' => 
+  array (
+    0 => '6',
+  ),
+  'CHECKWORD' => 'gj3d2jkxjqrqc7mbreyir5sjv0gqre87',
+  '~CHECKWORD_TIME' => 'now()',
+  'ACTIVE' => 'N',
+  'CONFIRM_CODE' => 'v73ustfp',
+  'LID' => 's1',
+  'LANGUAGE_ID' => 'ru',
+  'USER_IP' => '145.255.234.118',
+  'USER_HOST' => '145-255-234-118.obit.ru',
+  'AUTO_TIME_ZONE' => '',
+  'USER_ID' => 535,
+)
+
+array (
+  'LOGIN' => 'test_im1@infocarolinaspb.ru',
+  'EMAIL' => 'test_im1@infocarolinaspb.ru',
+  'PHONE_NUMBER' => '+7 (968) 187-51-28',
+  'PASSWORD' => 's4Sc8zkTXxydZzU',
+  'CONFIRM_PASSWORD' => 's4Sc8zkTXxydZzU',
+  'LAST_NAME' => 'Соловьев',
+  'NAME' => 'Кирилл',
+  'SECOND_NAME' => 'Рабочий',
+  'PERSONAL_PHONE' => '+7 (968) 187-51-28',
+  'GROUP_ID' => 
+  array (
+    0 => '6',
+  ),
+  'CHECKWORD' => 'q2pnhq0yn1r6z83wxiv1u512x4xwsaxz',
+  '~CHECKWORD_TIME' => 'now()',
+  'ACTIVE' => 'N',
+  'CONFIRM_CODE' => '',
+  'LID' => 's1',
+  'LANGUAGE_ID' => 'ru',
+  'USER_IP' => '46.33.212.151',
+  'USER_HOST' => 'adsl-46-33-l20151.crnagora.net',
+  'AUTO_TIME_ZONE' => '',
+  'USER_ID' => 536,
+)
+
+array (
+  'LOGIN' => 'aleksandr@0x41.ru',
+  'EMAIL' => 'aleksandr@0x41.ru',
+  'PHONE_NUMBER' => '+7 (958) 173-21-64',
+  'PASSWORD' => '1290as!@',
+  'CONFIRM_PASSWORD' => '1290as!@',
+  'LAST_NAME' => 'Aleksandr',
+  'NAME' => '',
+  'SECOND_NAME' => '',
+  'PERSONAL_PHONE' => '+7 (958) 173-21-64',
+  'GROUP_ID' => 
+  array (
+    0 => '6',
+  ),
+  'CHECKWORD' => 'xmqrms3xoye6ggx3rqj60zwjprw9tgu2',
+  '~CHECKWORD_TIME' => 'now()',
+  'ACTIVE' => 'N',
+  'CONFIRM_CODE' => '',
+  'LID' => 's1',
+  'LANGUAGE_ID' => 'ru',
+  'USER_IP' => '145.255.234.118',
+  'USER_HOST' => '145-255-234-118.obit.ru',
+  'AUTO_TIME_ZONE' => '',
+  'USER_ID' => 537,
+)
+
+array (
+  'LOGIN' => 'aleksandr@0x41.ru',
+  'EMAIL' => 'aleksandr@0x41.ru',
+  'PHONE_NUMBER' => '+7 (958) 173-21-64',
+  'PASSWORD' => '121212 ',
+  'CONFIRM_PASSWORD' => '121212 ',
+  'LAST_NAME' => 'Alekandr',
+  'NAME' => 'Ivanov',
+  'SECOND_NAME' => '',
+  'PERSONAL_PHONE' => '+7 (958) 173-21-64',
+  'GROUP_ID' => 
+  array (
+    0 => '6',
+  ),
+  'CHECKWORD' => '2z6mk1iifarpejafy8x9fmo3fdqmwe1a',
+  '~CHECKWORD_TIME' => 'now()',
+  'ACTIVE' => 'N',
+  'CONFIRM_CODE' => '',
+  'LID' => 's1',
+  'LANGUAGE_ID' => 'ru',
+  'USER_IP' => '145.255.234.118',
+  'USER_HOST' => '145-255-234-118.obit.ru',
+  'AUTO_TIME_ZONE' => '',
+  'USER_ID' => 538,
+)
+
+array (
+  'LOGIN' => '1',
+  'EMAIL' => 'yarik442@gmail.com',
+  'PHONE_NUMBER' => '+7 (911) 122-75-25',
+  'PASSWORD' => 'Qwerty3214',
+  'CONFIRM_PASSWORD' => 'Qwerty3214',
+  'LAST_NAME' => 'Тест',
+  'NAME' => 'Ярослав',
+  'SECOND_NAME' => 'Олегович',
+  'PERSONAL_PHONE' => '+7 (911) 122-75-25',
+  'GROUP_ID' => 
+  array (
+    0 => '6',
+  ),
+  'CHECKWORD' => '1k815s4pt5x619crqxxbmqvd9ilo0a82',
+  '~CHECKWORD_TIME' => 'now()',
+  'ACTIVE' => 'N',
+  'CONFIRM_CODE' => '',
+  'LID' => 's1',
+  'LANGUAGE_ID' => 'ru',
+  'USER_IP' => '92.100.98.127',
+  'USER_HOST' => '92.100.98.127',
+  'AUTO_TIME_ZONE' => '',
+)
+
+array (
+  'LOGIN' => '1',
+  'EMAIL' => 'ya.danilenko@carolinaspb.ru',
+  'PHONE_NUMBER' => '+7 (911) 122-75-25',
+  'PASSWORD' => 'Qwerty3214',
+  'CONFIRM_PASSWORD' => 'Qwerty3214',
+  'LAST_NAME' => 'Тест',
+  'NAME' => 'Ярослав',
+  'SECOND_NAME' => 'Олегович',
+  'PERSONAL_PHONE' => '+7 (911) 122-75-25',
+  'GROUP_ID' => 
+  array (
+    0 => '6',
+  ),
+  'CHECKWORD' => 'n1asiaiiw1us5p8fgq53qjfnzb4xn62d',
+  '~CHECKWORD_TIME' => 'now()',
+  'ACTIVE' => 'N',
+  'CONFIRM_CODE' => '',
+  'LID' => 's1',
+  'LANGUAGE_ID' => 'ru',
+  'USER_IP' => '92.100.98.127',
+  'USER_HOST' => '92.100.98.127',
+  'AUTO_TIME_ZONE' => '',
+)
+
+array (
+  'LOGIN' => 'solosbor@gmail.com',
+  'EMAIL' => 'solosbor@gmail.com',
+  'PHONE_NUMBER' => '+7 (921) 784-15-43',
+  'PASSWORD' => '9UmNvg',
+  'CONFIRM_PASSWORD' => '9UmNvg',
+  'LAST_NAME' => 'Кирилл',
+  'NAME' => '',
+  'SECOND_NAME' => '',
+  'PERSONAL_PHONE' => '+7 (921) 784-15-43',
+  'GROUP_ID' => 
+  array (
+    0 => '6',
+  ),
+  'CHECKWORD' => 'yicfgh4qj4sjvuqkm4ur8hl0bhzxz3ew',
+  '~CHECKWORD_TIME' => 'now()',
+  'ACTIVE' => 'N',
+  'CONFIRM_CODE' => '',
+  'LID' => 's1',
+  'LANGUAGE_ID' => 'ru',
+  'USER_IP' => '46.33.212.151',
+  'USER_HOST' => 'adsl-46-33-l20151.crnagora.net',
+  'AUTO_TIME_ZONE' => '',
+  'USER_ID' => 539,
+)
+
+array (
+  'LOGIN' => '1',
+  'EMAIL' => 'yarik442@gmail.com',
+  'PHONE_NUMBER' => '+7 (911) 122-75-25',
+  'PASSWORD' => 'qwerty',
+  'CONFIRM_PASSWORD' => 'qwerty',
+  'LAST_NAME' => 'Тест',
+  'NAME' => 'Ярослав',
+  'SECOND_NAME' => 'Олегович',
+  'PERSONAL_PHONE' => '+7 (911) 122-75-25',
+  'GROUP_ID' => 
+  array (
+    0 => '6',
+  ),
+  'CHECKWORD' => 'wna6ux4rzfu3xzkbhcntp20zhgxifosu',
+  '~CHECKWORD_TIME' => 'now()',
+  'ACTIVE' => 'N',
+  'CONFIRM_CODE' => '',
+  'LID' => 's1',
+  'LANGUAGE_ID' => 'ru',
+  'USER_IP' => '92.100.40.198',
+  'USER_HOST' => '92.100.40.198',
+  'AUTO_TIME_ZONE' => '',
+)
+
+array (
+  'LOGIN' => '1',
+  'EMAIL' => 'aleksandr@0x41.ru',
+  'PHONE_NUMBER' => '+7 (899) 963-22-22',
+  'PASSWORD' => '1290as12',
+  'CONFIRM_PASSWORD' => '1290as12',
+  'LAST_NAME' => 'asfsdfasdf',
+  'NAME' => '',
+  'SECOND_NAME' => '',
+  'PERSONAL_PHONE' => '+7 (899) 963-22-22',
+  'GROUP_ID' => 
+  array (
+    0 => '6',
+  ),
+  'CHECKWORD' => '3ogngq35lzdfnj51fczbf954yxvsq3kd',
+  '~CHECKWORD_TIME' => 'now()',
+  'ACTIVE' => 'N',
+  'CONFIRM_CODE' => '',
+  'LID' => 's1',
+  'LANGUAGE_ID' => 'ru',
+  'USER_IP' => '145.255.234.118',
+  'USER_HOST' => '145-255-234-118.obit.ru',
+  'AUTO_TIME_ZONE' => '',
+)
+
+array (
+  'LOGIN' => '1',
+  'EMAIL' => 'Keksus7@yandex.ru',
+  'PHONE_NUMBER' => '+7 (952) 381-39-79',
+  'PASSWORD' => 'qahjic-bunQur-fowdo5',
+  'CONFIRM_PASSWORD' => 'qahjic-bunQur-fowdo5',
+  'LAST_NAME' => 'Адамант',
+  'NAME' => '',
+  'SECOND_NAME' => '',
+  'PERSONAL_PHONE' => '+7 (952) 381-39-79',
+  'GROUP_ID' => 
+  array (
+    0 => '6',
+  ),
+  'CHECKWORD' => 'wbaslj63vt0tzimv6h8k33llq7oe1c7j',
+  '~CHECKWORD_TIME' => 'now()',
+  'ACTIVE' => 'N',
+  'CONFIRM_CODE' => '',
+  'LID' => 's1',
+  'LANGUAGE_ID' => 'ru',
+  'USER_IP' => '85.249.20.156',
+  'USER_HOST' => '85.249.20.156',
+  'AUTO_TIME_ZONE' => '',
+)
+
+array (
+  'LOGIN' => 'Keksus7@mail.ru',
+  'EMAIL' => 'Keksus7@mail.ru',
+  'PHONE_NUMBER' => '+7 (952) 381-39-79',
+  'PASSWORD' => 'qahjic-bunQur-fowdo5',
+  'CONFIRM_PASSWORD' => 'qahjic-bunQur-fowdo5',
+  'LAST_NAME' => 'Адамант',
+  'NAME' => '',
+  'SECOND_NAME' => '',
+  'PERSONAL_PHONE' => '+7 (952) 381-39-79',
+  'GROUP_ID' => 
+  array (
+    0 => '6',
+  ),
+  'CHECKWORD' => 'ku4t7ou4nufg2k0mvhueacvvfqxxggtr',
+  '~CHECKWORD_TIME' => 'now()',
+  'ACTIVE' => 'N',
+  'CONFIRM_CODE' => '',
+  'LID' => 's1',
+  'LANGUAGE_ID' => 'ru',
+  'USER_IP' => '85.249.20.156',
+  'USER_HOST' => '85.249.20.156',
+  'AUTO_TIME_ZONE' => '',
+  'USER_ID' => 541,
+)
+

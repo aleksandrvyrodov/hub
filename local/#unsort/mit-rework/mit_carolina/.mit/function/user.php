@@ -45,3 +45,17 @@ function filterByManagerForUser($name_filter_merge = null): array
     ['ID' => $MANAGER_ID]
   );
 }
+
+# \MIT\Function\User\isAuth()
+function isAuth()
+{
+  global $USER;
+  return $USER->IsAuthorized();
+}
+
+function ConfurmEmail(&$arFields){
+
+  file_put_contents(__DIR__ . '/fields.txt', var_export($arFields, true).PHP_EOL.PHP_EOL, FILE_APPEND);
+
+  return $arFields;
+}

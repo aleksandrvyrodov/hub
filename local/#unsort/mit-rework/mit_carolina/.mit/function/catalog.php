@@ -6,6 +6,9 @@ use MIT\Loader;
 use MIT\Model\FavoriteProduct;
 use MIT\Model\ExchangeMod1C;
 
+use const MIT\Catalog\MAIN_TARGET_PRICE_ID;
+use const MIT\Catalog\SECOND_TARGET_PRICE_ID;
+
 function listFavoriteProduct(): array
 {
   global ${__FUNCTION__ . ':Storage'};
@@ -103,4 +106,45 @@ function spoofAssociatedProp(&$arResult, &$arParams)
 function modifyProductByExchange1C(...$args)
 {
   include_once __DIR__ . '/../static/1c-exchange.php';
+}
+
+function targetPriceInSmartFilter(array $items): int
+{
+  $priceIdTarget = in_array(SECOND_TARGET_PRICE_ID, array_values(array_map(
+    fn ($item) => $item['ID'],
+    array_filter(
+      $items,
+      fn ($item) => ((bool)($item['PRICE'] ?? false))
+        ? !($item["VALUES"]["MAX"]["VALUE"] - $item["VALUES"]["MIN"]["VALUE"] <= 0)
+        : false
+    )
+  ))) ? SECOND_TARGET_PRICE_ID : MAIN_TARGET_PRICE_ID;
+
+  return $priceIdTarget;
+}
+
+function forciblyQuantity(\Bitrix\Catalog\Model\Event $event)
+{
+  static $store_id = [];
+
+  $result = new \Bitrix\Catalog\Model\EventResult();
+  $arParams = $event->getParameters('fields');
+
+  $arFields = &$arParams['fields'];
+  $id = &$arParams['id'];
+
+  $fn_ReadStore = function($id) use (&$store_id){
+    $Q = $store_id[(int)$id];
+    unset($store_id[(int)$id]);
+    return $Q;
+  };
+
+  if ($arFields['TYPE'] === 3)
+    $result->modifyFields(($_ = [
+      'QUANTITY' => $fn_ReadStore($id) ?? $arFields['QUANTITY']
+    ] + $arFields));
+  elseif((int)\CCatalogProduct::GetList([], ['ID' => $id], false, false, ['TYPE'])->Fetch()['TYPE'] === 3)
+      $store_id[(int)$id] = $arFields['QUANTITY'];
+
+  return $result;
 }

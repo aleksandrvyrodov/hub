@@ -63,7 +63,7 @@ abstract class TrapperStoraged implements ITrapperStoraged
 
   public function s_session(): self
   {
-    $this->storage['SESSION'] = $_SESSION;
+    $this->storage['SESSION'] = $_SESSION ?? '~SESSION_OFF';
     return $this;
   }
 
@@ -163,7 +163,7 @@ class Trapper extends TrapperStoraged
   private function set_head()
   {
     $this->content[0] = PHP_EOL . PHP_EOL;
-    $this->content[1] = '$DT___' . date('y_m_d__H_i_s') . ' = ';
+    $this->content[1] = '$DT___' . date('y_m_d__H_i_s') . '___' . hrtime(true) .' = ';
     $this->content[2] = ';' . PHP_EOL . PHP_EOL;
     $this->content[3] = '/*  ================================================================  */';
 

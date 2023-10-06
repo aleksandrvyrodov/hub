@@ -1,5 +1,4 @@
 /.vscode
-/dev/\!*
 
 #bitrix folder
 
@@ -7,14 +6,15 @@
 
 /bitrix/catalog_export
 /bitrix/updates
+/bitrix/wizards
+
+/bitrix/html_pages/*
+!/bitrix/html_pages
+!/bitrix/html_pages/.config.php
 
 /upload/*
 !/upload
 !/upload/.htaccess
-
-/bitrix/wizards
-/bitrix/catalog_export
-/bitrix/updates*
 
 /bitrix/cache/*
 !/bitrix/cache
@@ -32,9 +32,10 @@
 !/bitrix/backup
 !/bitrix/backup/index.php
 
-/bitrix/modules/*/install/
-!/bitrix/modules/*/install
-!/bitrix/modules/*/install/version.php
+#/bitrix/modules/*/install/
+#!/bitrix/modules/*/install
+#!/bitrix/modules/*/install/version.php
+#!/bitrix/modules/*/install/index.php
 
 /mysql_debug.sql
 /sitemap*.xml
@@ -43,6 +44,7 @@
 *.txt
 *.log
 *.css.map
+*.js.map
 
 *.zip
 *.zip*
@@ -56,5 +58,5 @@
 *.tgz*
 *.rar
 
-composer.phar
-vendor/
+#composer.phar
+#vendor/
